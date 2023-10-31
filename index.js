@@ -46,7 +46,7 @@ app.use(
      // httpOnly: false,
       maxAge: 2592000000,// 1mois en millisecondes
       sameSite: "none",
-      //secure: true,
+      secure: true,
     })
   );
 
