@@ -47,7 +47,7 @@ app.use(
       maxAge: 2592000000,// 1mois en millisecondes
       sameSite: "none",
       domain:"gestionnaire-contacts-nextjs-2.vercel.app",
-      //secure: true,
+      secure: true,
     })
   );
 
