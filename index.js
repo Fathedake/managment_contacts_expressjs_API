@@ -43,10 +43,10 @@ app.use(
     cookieSession({
       name: "bezkoder-session",
       keys: ["COOKIE_SECRET"], // should use as secret environment variable
-      httpOnly: false,
+     // httpOnly: false,
       maxAge: 2592000000,// 1mois en millisecondes
       sameSite: "none",
-      secure: true,
+      //secure: true,
     })
   );
 
