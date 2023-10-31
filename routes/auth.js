@@ -14,7 +14,7 @@ const authJwt = require("../middlewares/authjwt");
 router.post(
     "/register",
     [
-      //verifySignUp.checkedIfUserExist
+      verifySignUp.checkedIfUserExist
     ],
     authController.register
   );
