@@ -8,12 +8,20 @@ const {ObjectId} = require('mongodb');
 
 exports.register = async (req, res) => {
 
-   try {
-    console.log(req)
-    return res.status(200).json({message:'retour'})
-   } catch (error) {
+  const password = bcrypt.hashSync(req.body.password, 8)
+  try {
+    let newUser = new User(req.body.nom,
+      req.body.prenoms,
+      req.body.email,
+      password,
+      req.body.avatar)
+    let result = await db().collection("users").insertOne(newUser)
+    return res.status(200).json(result)
+  } catch (error) {
+    //console.log(error)
     return res.status(500).send({ msg: "Quelque chose n'a pas marché sur le serveur" });
-   }
+  }
+
 }
 
 exports.signin = async (req, res) => {
