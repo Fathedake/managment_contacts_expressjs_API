@@ -59,7 +59,7 @@ app.use("/api/v1",routeContacts)
 app.use("/api/v1",routeUser)
 app.get('/',(req,res)=>{ 
   res.send(`<h5 style="color:green"> 
-  Mon backend expressjs pour mon gestionnaire de contacts 14</h5>`) 
+  Mon backend expressjs pour mon gestionnaire de contacts 2</h5>`) 
 }) 
 connect(process.env.DB_URL,(erreur)=>{
   if(erreur){
