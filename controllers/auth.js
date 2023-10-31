@@ -73,7 +73,7 @@ exports.signin = async (req, res) => {
 
 
 exports.signout = async (req, res) => {
-  console.log(req)
+ // console.log(req)
   try {
     req.session = null;
     return res.status(200).send({

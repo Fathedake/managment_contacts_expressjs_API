@@ -44,8 +44,9 @@ app.use(
       name: "bezkoder-session",
       keys: ["COOKIE_SECRET"], // should use as secret environment variable
       httpOnly: true,
-       maxAge: 2592000000// 1mois en millisecondes
-     // sameSite:front_url
+      maxAge: 2592000000,// 1mois en millisecondes
+      sameSite: "none",
+      secure: true,
     })
   );
 
