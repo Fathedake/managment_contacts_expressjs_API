@@ -40,6 +40,18 @@ app.use(express.json())
 //
 console.log("Initialisation...")
 app.use(
+  cookieSession({
+    name: "bezkoder-session",
+    keys: ["COOKIE_SECRET"], 
+    maxAge: 2592000000,
+    secure: process.env.NODE_ENV === 'development' ? false : true,
+    httpOnly: process.env.NODE_ENV === 'development' ? false : true,
+    sameSite: process.env.NODE_ENV === 'development' ? false : 'none',
+  }),
+);
+
+app.enable('trust proxy');
+/*app.use(
     cookieSession({
       name: "bezkoder-session",
       keys: ["COOKIE_SECRET"], // should use as secret environment variable
@@ -48,8 +60,9 @@ app.use(
       sameSite: "none",
       domain:"gestionnaire-contacts-nextjs-2.vercel.app",
       secure: true,
+      
     })
-  );
+  );*/
 
 
 //
