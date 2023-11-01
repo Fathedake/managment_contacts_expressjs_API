@@ -61,7 +61,6 @@ app.use(
     secure: process.env.NODE_ENV === 'development' ? false : true,
     httpOnly: process.env.NODE_ENV === 'development' ? false : true,
     sameSite: process.env.NODE_ENV === 'development' ? false : 'none',
-    domain:"gestionnaire-contacts-nextjs-2.vercel.app",
   }),
 );
 
