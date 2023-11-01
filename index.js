@@ -1,6 +1,9 @@
 
 const express = require('express')
 
+
+//
+const cookieParser = require('cookie-parser');
 //
 const { connect } = require("./db/connection");
 
@@ -37,7 +40,10 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }))
 //
 app.use(express.json())
+
+
 //
+app.use(cookieParser())
 //
 console.log("Initialisation...")
 //app.set('trust proxy', 1) // trust first proxy
