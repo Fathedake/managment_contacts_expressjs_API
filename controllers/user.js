@@ -10,7 +10,7 @@ exports.getUser = async (req, res) => {
   try {
     let user = await db().collection('users').findOne({ "_id": id })
     if (!user) {
-      return res.status(204).send({ message: "Utilisateur non connecté", user: {_id:'',nom:'',prenoms:'',email:''}});
+      return res.status(200).send({ message: "Utilisateur non connecté", user: {_id:'',nom:'',prenoms:'',email:''}});
     }
     return res.status(200).send(
       {
