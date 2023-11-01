@@ -58,10 +58,10 @@ app.use(
     name: "bezkoder-session",
     keys: ["COOKIE_SECRET"], 
    // maxAge: 2592000000,
-    secure: process.env.NODE_ENV === 'development' ? false : true,
+    //secure: process.env.NODE_ENV === 'development' ? false : true,
     httpOnly:process.env.NODE_ENV === 'development' ? false : true,
-    sameSite: process.env.NODE_ENV === 'development' ? false : 'none',
-    domain: ".vercel.app",
+    //sameSite: process.env.NODE_ENV === 'development' ? false : 'none',
+    //domain: ".vercel.app",
   }),
 );
 
