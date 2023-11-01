@@ -1,21 +1,22 @@
 
-const express = require('express') 
+const express = require('express')
 
 //
 const { connect } = require("./db/connection");
 
 //importation des routes
-const routeAuth= require("./routes/auth");
-const routeContacts= require("./routes/contact");
-const routeUser= require("./routes/user");
+const routeAuth = require("./routes/auth");
+const routeContacts = require("./routes/contact");
+const routeUser = require("./routes/user");
 
 //
-const dotenv=require('dotenv')
+const dotenv = require('dotenv')
 //
 const cors = require("cors");
 //
 const cookieSession = require("cookie-session");
 //
+var session = require('express-session')
 //Charger les variables d'environnements
 dotenv.config()
 //Normalement ce sont les urls autorisés
@@ -25,20 +26,33 @@ dotenv.config()
 //
 const corsOptions = {
   //origin: true,
-  origin:["https://gestionnaire-contacts-nextjs-2.vercel.app","http://localhost:3000","http://localhost:3001"],
+  origin: ["https://gestionnaire-contacts-nextjs-2.vercel.app", "http://localhost:3000", "http://localhost:3001"],
   credentials: true,
-  //exposedHeaders: 'set-cookie',
+  exposedHeaders: 'set-cookie',
 };
 
-const app = express() 
+const app = express()
 app.use(cors(corsOptions));
 //
-app.use(express.urlencoded({extended:true}))
+app.use(express.urlencoded({ extended: true }))
 //
 app.use(express.json())
 //
 //
 console.log("Initialisation...")
+//app.set('trust proxy', 1) // trust first proxy
+/*app.use(session({
+  name: "bezkoder-session",
+  secret: "COOKIE_SECRET", 
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: process.env.NODE_ENV === 'development' ? false : true,
+    httpOnly: process.env.NODE_ENV === 'development' ? false : true,
+    sameSite: process.env.NODE_ENV === 'development' ? false : 'none',
+    maxAge:2592000000,
+  }
+}))*/
 app.use(
   cookieSession({
     name: "bezkoder-session",
@@ -47,11 +61,10 @@ app.use(
     secure: process.env.NODE_ENV === 'development' ? false : true,
     httpOnly: process.env.NODE_ENV === 'development' ? false : true,
     sameSite: process.env.NODE_ENV === 'development' ? false : 'none',
-   // domain:"gestionnaire-contacts-nextjs-2.vercel.app",
   }),
 );
 
-app.enable('trust proxy');
+//app.enable('trust proxy');
 /*app.use(
     cookieSession({
       name: "bezkoder-session",
@@ -67,25 +80,25 @@ app.enable('trust proxy');
 
 
 //
-const port=process.env.PORT
+const port = process.env.PORT
 
 //
-app.use("/api/auth",routeAuth)
-app.use("/api/v1",routeContacts)
-app.use("/api/v1",routeUser)
-app.get('/',(req,res)=>{ 
+app.use("/api/auth", routeAuth)
+app.use("/api/v1", routeContacts)
+app.use("/api/v1", routeUser)
+app.get('/', (req, res) => {
   res.send(`<h5 style="color:green"> 
-  Mon backend expressjs pour mon gestionnaire de contacts 2</h5>`) 
-}) 
-connect(process.env.DB_URL,(erreur)=>{
-  if(erreur){
-      console.log("Erreur lors de la connexion")
-      process.exit(-1)
-    }else{
-      console.log("Connexion à la BD avec succès")
-      app.listen(port || 8091,()=>{ 
-        console.log('Mon backend expressjs pour mon gestionnaire de contacts'+port) 
-    }) 
-    }
-  })
-module.exports=app
+  Mon backend expressjs pour mon gestionnaire de contacts 2</h5>`)
+})
+connect(process.env.DB_URL, (erreur) => {
+  if (erreur) {
+    console.log("Erreur lors de la connexion")
+    process.exit(-1)
+  } else {
+    console.log("Connexion à la BD avec succès")
+    app.listen(port || 8091, () => {
+      console.log('Mon backend expressjs pour mon gestionnaire de contacts' + port)
+    })
+  }
+})
+module.exports = app
