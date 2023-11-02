@@ -67,7 +67,7 @@ app.use(
     secure: process.env.NODE_ENV === 'development' ? false : true,
     httpOnly:process.env.NODE_ENV === 'development' ? false : true,
     sameSite: process.env.NODE_ENV === 'development' ? false : 'none',
-    //domain: ".vercel.app",
+   // domain:".vercel.app",
   }),
 );
 

@@ -48,12 +48,11 @@ exports.signin = async (req, res) => {
       {
         algorithm: 'HS256',
         allowInsecureKeySizes: true,
-        expiresIn: 2592000 // 1 mois en secondes
+       // expiresIn: 2592000 // 1 mois en secondes
       });
    // console.log(token)
-    req.session.token = token;
+     req.session.token = token;
    // console.log("re cookie",req.session).maxAge=120000
-    res.cookie('name', 'geeksforgeeks');
     return res.status(200).send(
       {
         user: {
@@ -63,7 +62,7 @@ exports.signin = async (req, res) => {
           avatar: user.avatar,
           email: user.email,
         },
-        //accessToken: token
+        accessToken: token
       }
     );
   } catch (error) {
