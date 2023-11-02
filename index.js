@@ -19,7 +19,7 @@ const cors = require("cors");
 //
 const cookieSession = require("cookie-session");
 //
-var session = require('express-session')
+//var session = require('express-session')
 //Charger les variables d'environnements
 dotenv.config()
 //Normalement ce sont les urls autorisés
@@ -43,7 +43,7 @@ app.use(express.json())
 
 
 //
-app.use(cookieParser())
+//app.use(cookieParser())
 //
 console.log("Initialisation...")
 app.use(
