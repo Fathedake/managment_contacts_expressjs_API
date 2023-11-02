@@ -5,7 +5,6 @@ const bcrypt = require("bcryptjs");
 const config = require('../config/auth')
 const {ObjectId} = require('mongodb');
 
-
 exports.register = async (req, res) => {
 
   const password = bcrypt.hashSync(req.body.password, 8)
@@ -48,7 +47,7 @@ exports.signin = async (req, res) => {
       {
         algorithm: 'HS256',
         allowInsecureKeySizes: true,
-       // expiresIn: 2592000 // 1 mois en secondes
+        expiresIn: 300//2592000 // 1 mois en secondes
       });
    // console.log(token)
      req.session.token = token;
