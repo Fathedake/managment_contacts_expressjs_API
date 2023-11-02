@@ -53,7 +53,7 @@ exports.signin = async (req, res) => {
    // console.log(token)
     req.session.token = token;
    // console.log("re cookie",req.session).maxAge=120000
-
+    res.cookie('name', 'geeksforgeeks');
     return res.status(200).send(
       {
         user: {
