@@ -28,7 +28,7 @@ const corsOptions = {
   //origin: true,
   origin: ["https://gestionnaire-contacts-nextjs-2.vercel.app", "http://localhost:3000", "http://localhost:3001"],
   credentials: true,
-  //exposedHeaders: 'set-cookie',
+  exposedHeaders: 'set-cookie',
 };
 
 const app = express()
@@ -40,7 +40,7 @@ app.use(express.json())
 
 
 //
-//app.use(cookieParser())
+app.use(cookieParser())
 //
 console.log("Initialisation...")
 /*app.use(
