@@ -49,7 +49,7 @@ exports.signin = async (req, res) => {
         allowInsecureKeySizes: true,
         expiresIn: 2592000 // 1 mois en secondes
       });
-     req.session.token = token;
+    // req.session.token = token;
     return res.status(200).send(
       {
         user: {

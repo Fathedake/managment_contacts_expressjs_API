@@ -1,9 +1,6 @@
 
 const express = require('express')
 
-
-//
-const cookieParser = require('cookie-parser');
 //
 const { connect } = require("./db/connection");
 
@@ -31,7 +28,7 @@ const corsOptions = {
   //origin: true,
   origin: ["https://gestionnaire-contacts-nextjs-2.vercel.app", "http://localhost:3000", "http://localhost:3001"],
   credentials: true,
-  exposedHeaders: 'set-cookie',
+  //exposedHeaders: 'set-cookie',
 };
 
 const app = express()
@@ -46,16 +43,16 @@ app.use(express.json())
 //app.use(cookieParser())
 //
 console.log("Initialisation...")
-app.use(
+/*app.use(
   cookieSession({
     name: "bezkoder-session",
     keys: ["COOKIE_SECRET"], 
     maxAge:  2592000000,// 1mois en millisecondes
-    secure: process.env.NODE_ENV === 'development' ? false : true,
+   // secure: process.env.NODE_ENV === 'development' ? false : true,
     httpOnly:process.env.NODE_ENV === 'development' ? false : true,
-    sameSite: process.env.NODE_ENV === 'development' ? false : 'none',
+   // sameSite: process.env.NODE_ENV === 'development' ? false : 'none',
   }),
-);
+);*/
 
 //
 const port = process.env.PORT
