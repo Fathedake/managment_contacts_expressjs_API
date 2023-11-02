@@ -46,44 +46,16 @@ app.use(express.json())
 app.use(cookieParser())
 //
 console.log("Initialisation...")
-//app.set('trust proxy', 1) // trust first proxy
-/*app.use(session({
-  name: "bezkoder-session",
-  secret: "COOKIE_SECRET", 
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: process.env.NODE_ENV === 'development' ? false : true,
-    httpOnly: process.env.NODE_ENV === 'development' ? false : true,
-    sameSite: process.env.NODE_ENV === 'development' ? false : 'none',
-    maxAge:2592000000,
-  }
-}))*/
 app.use(
   cookieSession({
     name: "bezkoder-session",
     keys: ["COOKIE_SECRET"], 
-    maxAge: 300000,// 1mois en millisecondes
+    maxAge:  2592000000,// 1mois en millisecondes
     secure: process.env.NODE_ENV === 'development' ? false : true,
     httpOnly:process.env.NODE_ENV === 'development' ? false : true,
     sameSite: process.env.NODE_ENV === 'development' ? false : 'none',
   }),
 );
-
-//app.enable('trust proxy');
-/*app.use(
-    cookieSession({
-      name: "bezkoder-session",
-      keys: ["COOKIE_SECRET"], // should use as secret environment variable
-      httpOnly: false,
-      maxAge: 2592000000,// 1mois en millisecondes
-      sameSite: "none",
-      domain:"gestionnaire-contacts-nextjs-2.vercel.app",
-      secure: true,
-      
-    })
-  );*/
-
 
 //
 const port = process.env.PORT
@@ -94,7 +66,7 @@ app.use("/api/v1", routeContacts)
 app.use("/api/v1", routeUser)
 app.get('/', (req, res) => {
   res.send(`<h5 style="color:green"> 
-  Mon backend expressjs pour mon gestionnaire de contacts 2</h5>`)
+  Mon backend expressjs pour mon gestionnaire de contacts </h5>`)
 })
 connect(process.env.DB_URL, (erreur) => {
   if (erreur) {
