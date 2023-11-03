@@ -14,7 +14,7 @@ const dotenv = require('dotenv')
 //
 const cors = require("cors");
 //
-const cookieSession = require("cookie-session");
+//const cookieSession = require("cookie-session");
 //
 //var session = require('express-session')
 //Charger les variables d'environnements
@@ -40,7 +40,7 @@ app.use(express.json())
 
 
 //
-app.use(cookieParser())
+//app.use(cookieParser())
 //
 console.log("Initialisation...")
 /*app.use(

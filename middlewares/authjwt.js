@@ -3,15 +3,14 @@ const config = require("../config/auth");
 const { db } = require("../db/connection");
 
 verifyToken = (req, res, next) => {
-  console.log(req.headers)
-  console.log(req.cookie)
-  if (!req.headers.authorization)
+ 
+  if (!req.query.token)
     return res.status(401).json({ success: false, message: "Pas de jeton fournit" })
 
-  let token = req.headers.authorization
+  let token = req.query.token
 
   // Bearer token
-  token = token.split(" ")[1]
+ // token = token.split(" ")[1]
   jwt.verify(token,
     config.secret,
     (err, decoded) => {
