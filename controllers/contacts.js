@@ -23,14 +23,9 @@ const getContacts = async (req, res) => {
         filters, page,
         contactsPerPage
     })
-   // console.log("success,",success)
     if(success){
     let response = {
         contacts: contactsList,
-       // page: page,
-        //filters: filters,
-        //entries_per_page: contactsPerPage,
-        //total_results: totalNumContacts,
     }
       return res.status(200).json(response)
     }else{
@@ -49,7 +44,6 @@ const addContact = async (req, res) => {
         let result = await db().collection("contacts").insertOne(contact)
         return res.status(200).json({success:true,msg:"Votre contact a été ajouté avec succès",data:result})
     } catch (error) {
-       // console.log(error)
        return res.status(500).json({success:false,msg:"Quelque chose n'a pas marché sur le serveur"})
        
     }
@@ -80,21 +74,13 @@ const updateContact = async (req, res) => {
         if (!contact) {
             return res.status(404).json({ msg: "Contact non trouvé" })
         }
-       // console.log(req.body)
         if (contact.user_id == user_id) {
-           // console.log(id,user_id)
             let result = await db().collection("contacts").updateOne({ user_id: user_id, _id: id }, { $set: {...req.body,} })
-            //console.log(result)
-            //if (result.modifiedCount === 0) {
-             //   return res.status(304).json({success:false, msg: "Echec de la mis à jour.Il semble que tu n'as changé aucune donnée" })
-           // } else {
                 return res.status(200).json({success:true, msg: "Modification réussie" })
-            //}
         } else {
             return res.status(401).send({success:false, message: "Tu n'es pas le détenteur du contact" })
         }
     } catch (error) {
-        // console.log(error)
         return res.status(500).json({success:false, message: "Quelque chose n'a pas marché au niveau du serveur" })
     }
 }
@@ -103,7 +89,6 @@ const deleteContact = async (req, res) => {
     try {
         let id = new ObjectId(req.params.id)
         let user_id = req.body.user_id
-       // console.log("user_id ",user_id )
         let contact = await db().collection("contacts").findOne({ _id: id })
         if (!contact) {
             return res.status(404).json({ msg: "Contact non trouvé" })
@@ -120,7 +105,6 @@ const deleteContact = async (req, res) => {
         }
 
     } catch (error) {
-       // console.log(error)
         return res.status(500).json(error)
     }
 }

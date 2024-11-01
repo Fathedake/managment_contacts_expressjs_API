@@ -1,12 +1,8 @@
-const { db, client } = require("../db/connection");
-const User = require("../models/User")
-
+const { db} = require("../db/connection");
 const { ObjectId } = require('mongodb');
 
 
 exports.getUser = async (req, res) => {
-  let id = new ObjectId(req.userId)
-  //console.log("req_id", id)
   try {
     let user = await db().collection('users').findOne({ "_id": id })
     if (!user) {
@@ -21,7 +17,6 @@ exports.getUser = async (req, res) => {
           avatar: user.avatar,
           email: user.email,
         },
-        //accessToken: token
       }
     );
   } catch (error) {
@@ -36,22 +31,16 @@ exports.updateUser = async (req, res) => {
     if (!user) {
       return res.status(404).json({ msg: "Utilisateur non trouvé" })
     }
-    //console.log(user._id ,id)
+
     if (req.params.id== req._id) {
       let result = await db().collection("users").updateOne({_id: id }, { $set: {...req.body,} })
-      //if (result.modifiedCount === 0) {
-        //return res.status(304).json({ msg: "Echec de la mis à jour.Il semble que tu n'as changé aucune donnée" })
-      //} else {
         return res.status(200).json({ msg: "Modification réussie" })
-
-     // }
     } else {
       return res.status(403).json({ msg: "Attention!Tu n'es pas autorisé à modifier les données d'autrui!" })
     }
 
 
   } catch (error) {
-    //console.log(error)
     return res.status(500).json(error)
   }
 }

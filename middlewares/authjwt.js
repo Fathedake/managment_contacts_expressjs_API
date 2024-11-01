@@ -9,8 +9,6 @@ verifyToken = (req, res, next) => {
 
   let token = req.query.token
 
-  // Bearer token
- // token = token.split(" ")[1]
   jwt.verify(token,
     config.secret,
     (err, decoded) => {

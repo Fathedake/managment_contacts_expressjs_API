@@ -1,34 +1,17 @@
-const { MongoClient, Db } = require("mongodb");
+const mongoose =require("mongoose");
 
-let client = null;
+const options= {
+  readPreference: 'secondary',
+};
+function connectDB(url, callback) {
 
-async function connect(url, callback) {
-  if (client === null) {
-    client = new MongoClient(url);
-    try {
-        await  client.connect();
-        callback();
-    } catch (error) {
-              client = null;
-              callback(err);
-     
-          }
-    }
-   else {
+  try {
+    mongoose.connect(url,options);
     callback();
+  } catch (err) {
+    callback(err);
+    process.exit(1);
   }
+  return;
 }
-
-function db() {
-  var db = new Db(client, process.env.DB_NAME);
-  return db;
-}
-
-function fermer() {
-  if (client) {
-    client.close();
-    client = null;
-  }
-}
-
-module.exports = { connect,  db, fermer };
+module.exports=connectDB
